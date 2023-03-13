@@ -1,6 +1,7 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+require('flatpickr/dist/themes/dark.css');
 
 const dateInput = document.querySelector('#datetime-picker');
 const startBtn = document.querySelector('[data-start]');
@@ -9,8 +10,8 @@ const dataHours = document.querySelector('[data-hours]');
 const dataMinutes = document.querySelector('[data-minutes]');
 const dataSeconds = document.querySelector('[data-seconds]');
 startBtn.setAttribute('disabled', true);
-let chosenDate = null;
-let timerId = null;
+let chosenDate;
+let timerId;
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -39,9 +40,9 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    if (selectedDates[0] < Date.now()) {
+    if (selectedDates[0] <= Date.now()) {
       Notify.failure('Please choose a date in the future');
-      startBtn.setAttribute('disabled', true);
+      // startBtn.setAttribute('disabled', true);
       dateInput.style.borderColor = 'red';
     } else {
       chosenDate = selectedDates[0];
@@ -59,11 +60,16 @@ function timerOn() {
   timerId = setInterval(() => {
     startBtn.setAttribute('disabled', true);
     dateInput.setAttribute('disabled', true);
-    const currentTime = Date.now();
-    const deltaTime = chosenDate - currentTime;
+    // const currentTime = Date.now();
+    const deltaTime = chosenDate - Date.now();
     if (deltaTime < 1000) {
       clearInterval(timerId);
-      startBtn.removeAttribute('disabled');
+
+      startBtn.removeEventListener('click', timerOn);
+      // startBtn.removeAttribute('disabled');
+      dateInput.removeAttribute('disabled');
+      clearInterval(timerId);
+      Notify.info('Repeat?');
     }
 
     const { days, hours, minutes, seconds } = convertMs(deltaTime);
@@ -78,6 +84,8 @@ function updClock({ days, hours, minutes, seconds }) {
   dataSeconds.textContent = seconds;
 }
 
-function addLeadingZero(value) {
-  return String(value).padStart(2, '0');
-}
+// function addLeadingZero(value) {
+//   return String(value).padStart(2, '0');
+// }
+
+const addLeadingZero = value => String(value).padStart(2, '0');

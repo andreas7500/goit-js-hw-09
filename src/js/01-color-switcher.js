@@ -7,7 +7,7 @@ stopBtn.setAttribute('disabled', true);
 
 startBtn.addEventListener('click', () => {
   startBtn.setAttribute('disabled', true);
-  stopBtn.removeAttribute('disabled', false);
+  stopBtn.removeAttribute('disabled');
 
   timeId = setInterval(() => {
     body.style.backgroundColor = getRandomHexColor();
@@ -16,7 +16,7 @@ startBtn.addEventListener('click', () => {
 
 stopBtn.addEventListener('click', () => {
   clearInterval(timeId);
-  startBtn.removeAttribute('disabled', false);
+  startBtn.removeAttribute('disabled');
   stopBtn.setAttribute('disabled', true);
 });
 

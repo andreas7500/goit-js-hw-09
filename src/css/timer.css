@@ -3,7 +3,7 @@ body {
 }
 
 input {
-  width: 300px;
+  width: 310px;
   height: 50px;
   padding: 0 10px 0 10px;
   border: 1px solid #cccccc;
@@ -14,10 +14,9 @@ button {
   width: 300px;
   height: 50px;
   margin-bottom: 50px;
-
-  background-color: rgb(10, 205, 230);
   border: none;
   cursor: pointer;
+  background-color: rgb(10, 205, 230);
 }
 
 button:disabled {
@@ -26,8 +25,8 @@ button:disabled {
 
 button:hover,
 button:focus {
-  background-color: rgb(10, 142, 230);
-  border: 2px solid rgb(10, 142, 230);
+  background-color: rgb(11, 170, 190);
+  border: 2px solid rgb(11, 170, 190);
 }
 
 .timer {
@@ -39,15 +38,7 @@ button:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
-
   width: 100px;
-  padding: 10px 0 10px 0;
-  margin-right: 20px;
-  /* border: 1px solid #cccccc; */
-}
-
-.field:last-child {
-  margin-right: 0;
 }
 
 .value {
