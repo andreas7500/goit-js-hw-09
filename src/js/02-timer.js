@@ -13,27 +13,6 @@ startBtn.setAttribute('disabled', true);
 let chosenDate;
 let timerId;
 
-function convertMs(ms) {
-  // Number of milliseconds per unit of time
-  const second = 1000;
-  const minute = second * 60;
-  const hour = minute * 60;
-  const day = hour * 24;
-
-  // Remaining days
-  const days = addLeadingZero(Math.floor(ms / day));
-  // Remaining hours
-  const hours = addLeadingZero(Math.floor((ms % day) / hour));
-  // Remaining minutes
-  const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
-  // Remaining seconds
-  const seconds = addLeadingZero(
-    Math.floor((((ms % day) % hour) % minute) / second)
-  );
-
-  return { days, hours, minutes, seconds };
-}
-
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -60,7 +39,6 @@ function timerOn() {
   timerId = setInterval(() => {
     startBtn.setAttribute('disabled', true);
     dateInput.setAttribute('disabled', true);
-    // const currentTime = Date.now();
     const deltaTime = chosenDate - Date.now();
     if (deltaTime < 1000) {
       clearInterval(timerId);
@@ -82,6 +60,27 @@ function updClock({ days, hours, minutes, seconds }) {
   dataHours.textContent = hours;
   dataMinutes.textContent = minutes;
   dataSeconds.textContent = seconds;
+}
+
+function convertMs(ms) {
+  // Number of milliseconds per unit of time
+  const second = 1000;
+  const minute = second * 60;
+  const hour = minute * 60;
+  const day = hour * 24;
+
+  // Remaining days
+  const days = addLeadingZero(Math.floor(ms / day));
+  // Remaining hours
+  const hours = addLeadingZero(Math.floor((ms % day) / hour));
+  // Remaining minutes
+  const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
+  // Remaining seconds
+  const seconds = addLeadingZero(
+    Math.floor((((ms % day) % hour) % minute) / second)
+  );
+
+  return { days, hours, minutes, seconds };
 }
 
 // function addLeadingZero(value) {
