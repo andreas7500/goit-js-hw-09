@@ -2,6 +2,7 @@ const startBtn = document.querySelector('[data-start]');
 const stopBtn = document.querySelector('[data-stop]');
 const body = document.body;
 let timeId = null;
+// ggggggggggggggggggggggggggggggggggggggggggggggggggg
 
 stopBtn.setAttribute('disabled', true);
 
